@@ -602,8 +602,15 @@ $$('a[href]').forEach(a=>{
 });
 window.addEventListener('pageshow',e=>{if(e.persisted&&curtain)curtain.classList.remove('in')});
 
-/* Disclaimer (Bar Council of India rules) */
-function maybeDisclaimer(){}else{$$('.cursor,.cursor-ring').forEach(e=>e.remove())}
+/* Disclaimer popup disabled */
+function maybeDisclaimer(){}
+
+/* Cursor */
+if(fine&&!reduce){const d=$('.cursor'),r=$('.cursor-ring');let x=innerWidth/2,y=innerHeight/2,rx=x,ry=y;
+  addEventListener('mousemove',e=>{x=e.clientX;y=e.clientY;d.style.transform=`translate(${x}px,${y}px) translate(-50%,-50%)`});
+  (function loop(){rx+=(x-rx)*.16;ry+=(y-ry)*.16;r.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;requestAnimationFrame(loop)})();
+  document.addEventListener('mouseover',e=>{r.classList.toggle('hover',!!e.target.closest('a,button,.card,.chip,.svc-item,input'))});
+}else{$$('.cursor,.cursor-ring').forEach(e=>e.remove())}
 
 /* Header, progress */
 const header=$('header.site'),prog=$('.progress');let lastY=0;
@@ -691,4 +698,3 @@ if(grid){const R=window.REVIEWS,south=/bengaluru|chennai|hyderabad|kochi|mysuru|
 </script>
 </body>
 </html>
-
